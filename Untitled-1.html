@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Images Cliquables</title>
+    <link rel="stylesheet" href="bienvenue.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            height: 100vh;
+            overflow-x: hidden;
+        }
+        #header {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+            margin: 20px;
+            align-self: flex-start;
+        }
+        #container {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            overflow-y: auto;
+            max-height: calc(100vh - 80px); 
+        }
+        .image {
+            margin: 10px;
+            cursor: pointer;
+            align-self: flex-end;
+        }
+        .image img {
+            width: auto;
+            max-height: 300px; 
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="logo.png" alt="Logo">
+        </div>
+        <nav>
+            <a href="#about">About</a>
+            <a href="#beat">Beat</a>
+            <a href="#pricing">déconnexion</a>
+            <a href="#note">Note</a>
+        </nav>
+    </header>
+    <div id="header">Modules</div>
+    <div id="container">
+        <div class="image"><img src="image1.jpg" alt="Image 1" onclick="showImage('image1.jpg')"></div>
+        <div class="image"><img src="image2.jpg" alt="Image 2" onclick="showImage('image2.jpg')"></div>
+        <div class="image"><img src="image3.jpg" alt="Image 3" onclick="showImage('image3.jpg')"></div>
+    </div>
+
+    <script>
+        function showImage(imageSrc) {
+            alert("Vous avez cliqué sur " + imageSrc);
+        }
+    </script>
+</body>
+</html>
