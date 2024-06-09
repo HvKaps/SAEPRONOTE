@@ -4,6 +4,7 @@
     <meta charset="utf-8"/>
     <title>Liste des étudiants par niveau</title>
     <link href="../css/listetudiant.css" rel="stylesheet" type="text/css"/>
+    <link href="../css/tableStyles.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <header>
