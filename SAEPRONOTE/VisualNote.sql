@@ -2,8 +2,8 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Hôte : localhost
--- Généré le : sam. 08 juin 2024 à 00:17
+-- HÃ´te : localhost
+-- GÃ©nÃ©rÃ© le : sam. 08 juin 2024 Ã  00:17
 -- Version du serveur : 10.4.28-MariaDB
 -- Version de PHP : 8.2.4
 
@@ -17,7 +17,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données : `VisualNote`
+-- Base de donnÃ©es : `VisualNote`
 --
 
 -- --------------------------------------------------------
@@ -46,7 +46,7 @@ INSERT INTO `Compte` (`Ordre`, `Role`) VALUES
 --
 
 CREATE TABLE `Administrateur` (
-  `idAdmin` int(11) NOT NULL,
+  `idAdmin` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(30) DEFAULT NULL,
   `password` varchar(255) DEFAULT NULL,
   `Role` varchar(30) NOT NULL,
@@ -54,7 +54,7 @@ CREATE TABLE `Administrateur` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Déchargement des données de la table `Administrateur`
+-- DÃ©chargement des donnÃ©es de la table `Administrateur`
 --
 
 INSERT INTO `Administrateur` (`idAdmin`, `username`, `password`, `Role`) VALUES
@@ -67,7 +67,7 @@ INSERT INTO `Administrateur` (`idAdmin`, `username`, `password`, `Role`) VALUES
 --
 
 CREATE TABLE `Enseignants` (
-  `ID_enseignant` int(11) NOT NULL,
+  `ID_enseignant` int(11) NOT NULL AUTO_INCREMENT,
   `Nom` varchar(255) DEFAULT NULL,
   `Prenom` varchar(255) DEFAULT NULL,
   `login` varchar(255) DEFAULT NULL,
@@ -77,7 +77,7 @@ CREATE TABLE `Enseignants` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Déchargement des données de la table `Enseignants`
+-- DÃ©chargement des donnÃ©es de la table `Enseignants`
 --
 
 INSERT INTO `Enseignants` (`ID_enseignant`, `Nom`, `Prenom`, `login`, `mdp`, `Role`) VALUES
@@ -90,7 +90,7 @@ INSERT INTO `Enseignants` (`ID_enseignant`, `Nom`, `Prenom`, `login`, `mdp`, `Ro
 --
 
 CREATE TABLE `Etudiants` (
-  `ID_etudiant` int(11) NOT NULL, 
+  `ID_etudiant` int(11) NOT NULL AUTO_INCREMENT, 
   `Nom` varchar(255) DEFAULT NULL,
   `Prenom` varchar(255) DEFAULT NULL,
   `username` varchar(255) DEFAULT NULL,
@@ -104,7 +104,7 @@ CREATE TABLE `Etudiants` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Déchargement des données de la table `Etudiants`
+-- DÃ©chargement des donnÃ©es de la table `Etudiants`
 --
 
 INSERT INTO `Etudiants` (`ID_etudiant`, `Nom`, `Prenom`, `username`, `password`, `adresse`, `Niveau`, `Groupe`, `promotion`, `Role`) VALUES
@@ -117,12 +117,12 @@ INSERT INTO `Etudiants` (`ID_etudiant`, `Nom`, `Prenom`, `username`, `password`,
 --
 
 CREATE TABLE `Groupes` (
-  `ID_groupe` int(11) NOT NULL,
+  `ID_groupe` int(11) NOT NULL AUTO_INCREMENT,
   `Nom_groupe` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Déchargement des données de la table `Groupes`
+-- DÃ©chargement des donnÃ©es de la table `Groupes`
 --
 
 INSERT INTO `Groupes` (`ID_groupe`, `Nom_groupe`) VALUES
@@ -152,7 +152,7 @@ INSERT INTO `Groupes` (`ID_groupe`, `Nom_groupe`) VALUES
 --
 
 CREATE TABLE `Notes` (
-  `ID_note` int(11) NOT NULL,
+  `ID_note` int(11) NOT NULL AUTO_INCREMENT,
   `ID_enseignant` int(11) NOT NULL,
   `ID_etudiant` int(11) NOT NULL,
   `note` float NOT NULL,
@@ -162,7 +162,7 @@ CREATE TABLE `Notes` (
 -- --------------------------------------------------------
 
 --
--- Index pour les tables déchargées
+-- Index pour les tables dÃ©chargÃ©es
 --
 
 -- Index pour la table `Administrateur`
@@ -195,7 +195,7 @@ ALTER TABLE `Compte`
 -- --------------------------------------------------------
 
 --
--- AUTO_INCREMENT pour les tables déchargées
+-- AUTO_INCREMENT pour les tables dÃ©chargÃ©es
 --
 
 -- AUTO_INCREMENT pour la table `Administrateur`
