@@ -71,21 +71,35 @@
     // Inclure le fichier de configuration de la base de données
     require 'config.php';
 
-    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-        // Ajouter des professeurs
-        if (isset($_POST['submit_prof'])) {
-            $nom = $_POST['prof_nom'];
-            $classe = $_POST['prof_classe'];
-            $prenom = $_POST['prof_prenom'];
-            $ressource = $_POST['prof_ressource'];
+   if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    // Ajouter des professeurs
+    if (isset($_POST['submit_prof'])) {
+        $nom = $_POST['prof_nom'];
+        $classe = $_POST['prof_classe'];
+        $prenom = $_POST['prof_prenom'];
+        $ressource = $_POST['prof_ressource'];
 
-            $sql = "INSERT INTO professeurs (nom, classe, prenom, ressource) VALUES ('$nom', '$classe', '$prenom', '$ressource')";
-            if ($conn->query($sql) === TRUE) {
-                echo "Nouveau professeur ajouté avec succès";
-            } else {
-                echo "Erreur: " . $sql . "<br>" . $conn->error;
-            }
+        // Utilisation d'une requête préparée pour l'insertion
+        $sql = "INSERT INTO professeurs (nom, classe, prenom, ressource) VALUES (:nom, :classe, :prenom, :ressource)";
+        $stmt = $conn->prepare($sql);
+
+   
+        $stmt->bindParam(':nom', $nom);
+        $stmt->bindParam(':classe', $classe);
+        $stmt->bindParam(':prenom', $prenom);
+        $stmt->bindParam(':ressource', $ressource);
+
+
+        if ($stmt->execute()) {
+            echo "Nouveau professeur ajouté avec succès";
+        } else {
+            echo "Erreur: " . $stmt->errorInfo()[2];
         }
+    }
+}
+
+// Fermeture de la connexion PDO (optionnel, car PDO ferme automatiquement les connexions en fin de script)
+$conn = null;
 
         // Ajouter des élèves
         if (isset($_POST['submit_eleve'])) {
