@@ -68,7 +68,7 @@
 
     <?php
     
-    // Inclure le fichier de configuration de la base de données
+
     require 'config.php';
 
    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -79,7 +79,7 @@
         $prenom = $_POST['prof_prenom'];
         $ressource = $_POST['prof_ressource'];
 
-        // Utilisation d'une requête préparée pour l'insertion
+       
         $sql = "INSERT INTO professeurs (nom, classe, prenom, ressource) VALUES (:nom, :classe, :prenom, :ressource)";
         $stmt = $conn->prepare($sql);
 
@@ -98,37 +98,9 @@
     }
 }
 
-// Fermeture de la connexion PDO (optionnel, car PDO ferme automatiquement les connexions en fin de script)
+
 $conn = null;
 
-        // Ajouter des élèves
-        if (isset($_POST['submit_eleve'])) {
-            $nom = $_POST['eleve_nom'];
-            $classe = $_POST['eleve_classe'];
-            $prenom = $_POST['eleve_prenom'];
-
-            $sql = "INSERT INTO eleves (nom, classe, prenom) VALUES ('$nom', '$classe', '$prenom')";
-            if ($conn->query($sql) === TRUE) {
-                echo "Nouvel élève ajouté avec succès";
-            } else {
-                echo "Erreur: " . $sql . "<br>" . $conn->error;
-            }
-        }
-
-        // Ajouter des ressources
-        if (isset($_POST['submit_ressource'])) {
-            $nom = $_POST['ressource_nom'];
-            $type = $_POST['ressource_type'];
-            $description = $_POST['ressource_description'];
-
-            $sql = "INSERT INTO ressources (nom, type, description) VALUES ('$nom', '$type', '$description')";
-            if ($conn->query($sql) === TRUE) {
-                echo "Nouvelle ressource ajoutée avec succès";
-            } else {
-                echo "Erreur: " . $sql . "<br>" . $conn->error;
-            }
-        }
-    }
     ?>
 </body>
 </html>
