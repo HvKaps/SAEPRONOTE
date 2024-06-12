@@ -94,8 +94,8 @@ CREATE TABLE Moyennes (
 INSERT INTO Moyennes (ID_etudiant, moyenne)
 SELECT ID_etudiant, AVG(note) as moyenne
 FROM Notes
-GROUP BY ID_etudiant
-ON DUPLICATE KEY UPDATE moyenne = VALUES(moyenne);
+GROUP BY ID_etudiant;
+
 
 
 
