@@ -72,34 +72,31 @@
 </div>
 
 <?php
-// Connexion à la base de données
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "VisualNote";
 
-$conn = new mysqli($servername, $username, $password, $dbname);
+require 'config.php';
 
-// Vérifier la connexion
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
 
-// Vérifier si le formulaire d'ajout de note a été soumis
 if (isset($_POST['submit_note'])) {
 
     $ressource = $_POST['ressource'];
     $etudiant = $_POST['etudiant'];
     $note = $_POST['note'];
-    $enseignant_id = 1; // Remplacer par l'ID de l'enseignant connecté
+    $enseignant_id = 1; 
+
 
     $sql = "INSERT INTO Notes (ID_enseignant, ID_etudiant, note, ressource)
-            VALUES (?, ?, ?, ?)";
+            VALUES (:enseignant_id, :etudiant, :note, :ressource)";
     
+
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("iids", $enseignant_id, $etudiant, $note, $ressource);
+
+    $stmt->bindParam(':enseignant_id', $enseignant_id, PDO::PARAM_INT);
+    $stmt->bindParam(':etudiant', $etudiant, PDO::PARAM_INT);
+    $stmt->bindParam(':note', $note, PDO::PARAM_STR);
+    $stmt->bindParam(':ressource', $ressource, PDO::PARAM_STR);
+
     if ($stmt->execute()) {
-        // Rediriger vers voirnote.php après l'ajout réussi
+
         header("Location: voiranote.php");
         exit();
     } else {
@@ -107,8 +104,9 @@ if (isset($_POST['submit_note'])) {
     }
 }
 
-// Fermer la connexion
-$conn->close();
+
+$conn = null;
 ?>
+
 </body>
 </html>
