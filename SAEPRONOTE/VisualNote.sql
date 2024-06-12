@@ -85,10 +85,24 @@ INSERT INTO `Enseignants` (`ID_enseignant`, `Nom`, `Prenom`, `login`, `mdp`, `Ro
 
 -- --------------------------------------------------------
 
+CREATE TABLE Moyennes (
+    ID_etudiant INT NOT NULL,
+    moyenne DECIMAL(5,2) NOT NULL,
+    FOREIGN KEY (ID_etudiant) REFERENCES Etudiants(ID_etudiant)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+INSERT INTO Moyennes (ID_etudiant, moyenne)
+SELECT ID_etudiant, AVG(note) as moyenne
+FROM Notes
+GROUP BY ID_etudiant
+ON DUPLICATE KEY UPDATE moyenne = VALUES(moyenne);
+
+
+
+------------------------
 --
 -- Structure de la table `Etudiants`
 --
-
 CREATE TABLE `Etudiants` (
   `ID_etudiant` int(11) NOT NULL AUTO_INCREMENT, 
   `Nom` varchar(255) DEFAULT NULL,
