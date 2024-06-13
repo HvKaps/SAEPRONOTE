@@ -20,17 +20,7 @@
 
 <?php
 
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "VisualNote";
-
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
+require '../config.php';
 
 $enseignant_id = 1; 
 $sql = "SELECT 
@@ -42,15 +32,14 @@ $sql = "SELECT
         FROM Notes
         JOIN Etudiants ON Notes.ID_etudiant = Etudiants.ID_etudiant
         JOIN Groupes ON Etudiants.Groupe = Groupes.ID_groupe
-        WHERE Notes.ID_enseignant = ?";
+        WHERE Notes.ID_enseignant = :enseignant_id";
 
 $stmt = $conn->prepare($sql);
-$stmt->bind_param("i", $enseignant_id);
+$stmt->bindParam(':enseignant_id', $enseignant_id, PDO::PARAM_INT);
 $stmt->execute();
-$result = $stmt->get_result();
+$result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-
-if ($result->num_rows > 0) {
+if (count($result) > 0) {
     echo "<table border='1'>
     <tr>
     <th>Nom</th>
@@ -60,13 +49,13 @@ if ($result->num_rows > 0) {
     <th>Ressource</th>
     </tr>";
 
-    while ($row = $result->fetch_assoc()) {
+    foreach ($result as $row) {
         echo "<tr>";
-        echo "<td>" . $row['NomEtudiant'] . "</td>";
-        echo "<td>" . $row['PrenomEtudiant'] . "</td>";
-        echo "<td>" . $row['Groupe'] . "</td>";
-        echo "<td>" . $row['Note'] . "</td>";
-        echo "<td>" . $row['Ressource'] . "</td>";
+        echo "<td>" . htmlspecialchars($row['NomEtudiant']) . "</td>";
+        echo "<td>" . htmlspecialchars($row['PrenomEtudiant']) . "</td>";
+        echo "<td>" . htmlspecialchars($row['Groupe']) . "</td>";
+        echo "<td>" . htmlspecialchars($row['Note']) . "</td>";
+        echo "<td>" . htmlspecialchars($row['Ressource']) . "</td>";
         echo "</tr>";
     }
 
@@ -75,7 +64,6 @@ if ($result->num_rows > 0) {
     echo "Aucune note pour le moment.";
 }
 
-$conn->close();
 ?>
 </div>
 </body>
