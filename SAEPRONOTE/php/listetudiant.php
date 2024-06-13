@@ -42,7 +42,7 @@ require '../config.php';
     $stmt->execute();
     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-    // Affichage des résultats dans un tableau HTML
+
     if (count($result) > 0) {
         echo "<table border='1'>
         <tr>
@@ -69,7 +69,7 @@ require '../config.php';
     echo "Erreur : " . $e->getMessage();
 }
 
-// Fermeture de la connexion (facultatif)
+
 $conn = null;
 
 ?>
