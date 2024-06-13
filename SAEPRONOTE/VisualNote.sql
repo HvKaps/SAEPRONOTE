@@ -114,6 +114,7 @@ CREATE TABLE `Etudiants` (
   `Groupe` int(11) NOT NULL,
   `promotion` int(11) DEFAULT NULL,
   `Role` varchar(30) NOT NULL,
+  `Rang` int(11) NOT NULL,
   FOREIGN KEY (`Role`) REFERENCES `Compte`(`Role`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
