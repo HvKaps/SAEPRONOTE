@@ -50,6 +50,7 @@ CREATE TABLE `Administrateur` (
   `username` varchar(30) DEFAULT NULL,
   `password` varchar(255) DEFAULT NULL,
   `Role` varchar(30) NOT NULL,
+  Primary key (`idAdmin`),
   FOREIGN KEY (`Role`) REFERENCES `Compte`(`Role`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -73,6 +74,7 @@ CREATE TABLE `Enseignants` (
   `login` varchar(255) DEFAULT NULL,
   `mdp` varchar(255) DEFAULT NULL,
   `Role` varchar(30) NOT NULL,
+  Primary key (`ID_enseignant`),
   FOREIGN KEY (`Role`) REFERENCES `Compte`(`Role`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -88,12 +90,15 @@ INSERT INTO `Enseignants` (`ID_enseignant`, `Nom`, `Prenom`, `login`, `mdp`, `Ro
 CREATE TABLE Moyennes (
     ID_etudiant INT NOT NULL,
     moyenne DECIMAL(5,2) NOT NULL,
+    PRIMARY KEY (`moyenne`),
     FOREIGN KEY (ID_etudiant) REFERENCES Etudiants(ID_etudiant)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-INSERT INTO Moyennes (ID_etudiant, moyenne)
+INSERT INTO `Moyennes` (ID_etudiant, moyenne) VALUES
+(SELECT ID_etudiant
+FROM   Etudiants,
 SELECT ID_etudiant, AVG(note) as moyenne
-FROM Notes
+FROM Notes)
 GROUP BY ID_etudiant;
 
 
@@ -115,15 +120,18 @@ CREATE TABLE `Etudiants` (
   `promotion` int(11) DEFAULT NULL,
   `Role` varchar(30) NOT NULL,
   `Rang` int(11) NOT NULL,
-  FOREIGN KEY (`Role`) REFERENCES `Compte`(`Role`)
+  `moyenne` DECIMAL(5,2) NOT NULL,
+  Primary key (`ID_etudiant`),
+  FOREIGN KEY (`Role`) REFERENCES `Compte`(`Role`),
+  FOREIGN KEY (`moyenne`) REFERENCES `Moyennes`(`moyenne`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- DÃ©chargement des donnÃ©es de la table `Etudiants`
 --
 
-INSERT INTO `Etudiants` (`ID_etudiant`, `Nom`, `Prenom`, `username`, `password`, `adresse`, `Niveau`, `Groupe`, `promotion`, `Role`) VALUES
-(1, 'Dupont', 'Jean', 'jean.du', '$2y$10$jNSw4nvM/utqjylaORfpeOhbl0O974B3emETZH9ONfSYLLweXwOR.', NULL, 'BUT1', 1, 2024, 'etudiant');
+INSERT INTO `Etudiants` (`ID_etudiant`, `Nom`, `Prenom`, `username`, `password`, `adresse`, `Niveau`, `Groupe`, `promotion`, `Role`, `Rang`) VALUES
+(1, 'Dupont', 'Jean', 'jean.du', '$2y$10$jNSw4nvM/utqjylaORfpeOhbl0O974B3emETZH9ONfSYLLweXwOR.', NULL, 'BUT1', 1, 2024, 'etudiant', Rank() Over(Order By moyenne Desc) );
 
 -- --------------------------------------------------------
 
@@ -133,7 +141,8 @@ INSERT INTO `Etudiants` (`ID_etudiant`, `Nom`, `Prenom`, `username`, `password`,
 
 CREATE TABLE `Groupes` (
   `ID_groupe` int(11) NOT NULL AUTO_INCREMENT,
-  `Nom_groupe` varchar(255) DEFAULT NULL
+  `Nom_groupe` varchar(255) DEFAULT NULL,
+  Primary key (`ID_groupe`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -171,7 +180,8 @@ CREATE TABLE `Notes` (
   `ID_enseignant` int(11) NOT NULL,
   `ID_etudiant` int(11) NOT NULL,
   `note` float NOT NULL,
-  `ressource` varchar(255) NOT NULL
+  `ressource` varchar(255) NOT NULL,
+  Primary key (`ID_note`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -182,17 +192,14 @@ CREATE TABLE `Notes` (
 
 -- Index pour la table `Administrateur`
 ALTER TABLE `Administrateur`
-  ADD PRIMARY KEY (`idAdmin`),
   ADD UNIQUE KEY `username` (`username`);
 
 -- Index pour la table `Enseignants`
 ALTER TABLE `Enseignants`
-  ADD PRIMARY KEY (`ID_enseignant`),
   ADD UNIQUE KEY `login` (`login`);
 
 -- Index pour la table `Etudiants`
 ALTER TABLE `Etudiants`
-  ADD PRIMARY KEY (`ID_etudiant`),
   ADD UNIQUE KEY `username` (`username`);
 
 -- Index pour la table `Groupes`
