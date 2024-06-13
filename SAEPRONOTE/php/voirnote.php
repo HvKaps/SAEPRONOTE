@@ -24,6 +24,7 @@ require '../config.php';
 
 $enseignant_id = 1; 
 $sql = "SELECT 
+            Etudiants.Rang AS RangEtudiant,
             Etudiants.Nom AS NomEtudiant, 
             Etudiants.Prenom AS PrenomEtudiant, 
             Groupes.Nom_groupe AS Groupe, 
@@ -42,6 +43,7 @@ $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 if (count($result) > 0) {
     echo "<table border='1'>
     <tr>
+    <th>Rang</th>
     <th>Nom</th>
     <th>Prénom</th>
     <th>Groupe</th>
@@ -51,6 +53,7 @@ if (count($result) > 0) {
 
     foreach ($result as $row) {
         echo "<tr>";
+        echo "<td>" . htmlspecialchars($row['RangEtudiant']) . "</td>";
         echo "<td>" . htmlspecialchars($row['NomEtudiant']) . "</td>";
         echo "<td>" . htmlspecialchars($row['PrenomEtudiant']) . "</td>";
         echo "<td>" . htmlspecialchars($row['Groupe']) . "</td>";
