@@ -76,37 +76,47 @@
 require '../config.php';
 
 
+<?php
 if (isset($_POST['submit_note'])) {
-
     $ressource = $_POST['ressource'];
     $etudiant = $_POST['etudiant'];
     $note = $_POST['note'];
     $enseignant_id = 1; 
 
+    try {
+      
+        $conn = new PDO("mysql:host=localhost;dbname=VisualNote", "username", "password");
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    $sql = "INSERT INTO Notes (ID_enseignant, ID_etudiant, note, ressource)
-            VALUES (:enseignant_id, :etudiant, :note, :ressource)";
-    
 
-    $stmt = $conn->prepare($sql);
+        $sql = "INSERT INTO Notes (ID_enseignant, ID_etudiant, note, ressource)
+                VALUES (:enseignant_id, :etudiant, :note, :ressource)";
+        
+        $stmt = $conn->prepare($sql);
 
-    $stmt->bindParam(':enseignant_id', $enseignant_id, PDO::PARAM_INT);
-    $stmt->bindParam(':etudiant', $etudiant, PDO::PARAM_INT);
-    $stmt->bindParam(':note', $note, PDO::PARAM_STR);
-    $stmt->bindParam(':ressource', $ressource, PDO::PARAM_STR);
+        // Liaison des paramètres
+        $stmt->bindParam(':enseignant_id', $enseignant_id, PDO::PARAM_INT);
+        $stmt->bindParam(':etudiant', $etudiant, PDO::PARAM_INT);
+        $stmt->bindParam(':note', $note, PDO::PARAM_STR);
+        $stmt->bindParam(':ressource', $ressource, PDO::PARAM_STR);
 
-    if ($stmt->execute()) {
-
-        header("Location: voiranote.php");
-        exit();
-    } else {
-        echo "Erreur lors de l'ajout de la note.";
+        // Exécution de la requête préparée
+        if ($stmt->execute()) {
+         
+            header("Location: voiranote.php");
+            exit();
+        } else {
+            echo "Erreur lors de l'ajout de la note.";
+        }
+    } catch (PDOException $e) {
+        echo "Erreur : " . $e->getMessage();
     }
+
+  
+    $conn = null;
 }
-
-
-$conn = null;
 ?>
+
 
 </body>
 </html>
