@@ -64,13 +64,13 @@ if (isset($_POST['submit_note'])) {
         
         $stmt = $conn->prepare($sql);
 
-        // Liaison des paramètres
+
         $stmt->bindParam(':enseignant_id', $enseignant_id, PDO::PARAM_INT);
         $stmt->bindParam(':etudiant', $etudiant, PDO::PARAM_INT);
         $stmt->bindParam(':note', $note, PDO::PARAM_STR);
         $stmt->bindParam(':ressource', $ressource, PDO::PARAM_STR);
 
-        // Exécution de la requête préparée
+
         if ($stmt->execute()) {
          
             header("Location: voiranote.php");
