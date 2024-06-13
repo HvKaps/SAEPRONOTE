@@ -40,37 +40,7 @@
                 </div>
             </form>
         </div>
-        <div class="column-4">
-            <h4>Modification</h4>
-            <form id="webflow-form" name="webflow-form" method="post" class="form">
-                <div class="input-wrapper">
-                    <input class="form-text-input w-input" maxlength="256" name="id_evaluation" placeholder="ID évaluation" type="text"/>
-                </div>
-                <div class="input-wrapper-2">
-                    <input class="form-text-input-7 w-input" maxlength="256" name="classe_modif" placeholder="Classe" type="text"/>
-                </div>
-                <div class="input-wrapper-2">
-                    <input class="form-text-input-8 w-input" maxlength="256" name="ressource_modif" placeholder="Ressource" type="text"/>
-                </div>
-                <div class="input-wrapper-2">
-                    <input class="form-text-input-9 w-input" maxlength="256" name="etudiant_modif" placeholder="Étudiant" type="text"/>
-                </div>
-                <div class="input-wrapper-2">
-                    <input class="form-text-input-10 w-input" maxlength="256" name="note_modif" placeholder="Note" type="text"/>
-                </div>
-                <div class="bouttons">
-                    <div class="column-2">
-                        <input type="submit" name="submit_modif" class="form-button w-button" value="Valider"/>
-                    </div>
-                    <div class="column-3">
-                        <input type="reset" class="form-button w-button" value="Effacer"/>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-
+        
 <?php
 
 require '../config.php';
