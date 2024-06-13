@@ -28,38 +28,22 @@
     </form>
 
 <?php
-if (isset($_GET['niveau'])) {
-    $niveau = $_GET['niveau'];
+require '../config.php';
 
-    // Connexion à la base de données
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $dbname = "VisualNote";
 
-    $conn = new mysqli($servername, $username, $password, $dbname);
-
-    // Vérifier la connexion
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
-
-    // Requête pour récupérer les étudiants du niveau spécifié
     $sql = "SELECT ID_etudiant, Nom, Prenom, Groupe 
             FROM Etudiants 
-            WHERE Niveau = ?";
-    
-    $stmt = $conn->prepare($sql);
-    if ($stmt === false) {
-        die("Error preparing statement: " . $conn->error);
-    }
+            WHERE Niveau = :niveau";
 
-    $stmt->bind_param("s", $niveau);
+    $stmt = $conn->prepare($sql);
+    
+    $niveau = 'Niveau à spécifier'; 
+    $stmt->bindParam(':niveau', $niveau, PDO::PARAM_STR);
     $stmt->execute();
-    $result = $stmt->get_result();
+    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     // Affichage des résultats dans un tableau HTML
-    if ($result->num_rows > 0) {
+    if (count($result) > 0) {
         echo "<table border='1'>
         <tr>
             <th>ID Etudiant</th>
@@ -68,7 +52,7 @@ if (isset($_GET['niveau'])) {
             <th>Groupe</th>
         </tr>";
 
-        while ($row = $result->fetch_assoc()) {
+        foreach ($result as $row) {
             echo "<tr>";
             echo "<td>" . $row['ID_etudiant'] . "</td>";
             echo "<td>" . $row['Nom'] . "</td>";
@@ -81,10 +65,13 @@ if (isset($_GET['niveau'])) {
     } else {
         echo "Aucun étudiant trouvé pour le niveau sélectionné.";
     }
-
-    // Fermer la connexion
-    $conn->close();
+} catch (PDOException $e) {
+    echo "Erreur : " . $e->getMessage();
 }
+
+// Fermeture de la connexion (facultatif)
+$conn = null;
+
 ?>
 </div>
 </body>
