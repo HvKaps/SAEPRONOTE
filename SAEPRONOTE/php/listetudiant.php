@@ -8,12 +8,16 @@
 </head>
 <body>
 <header>
-    <nav>
-        <div class="menu">
+        <a href="Acceuil_prof.php">
             <img class="logo" src="../image/Logo.png" alt="logo">
-        </div>
-    </nav>
-</header>
+        </a>
+        <nav>
+            <ul>
+                <li><a href="../php/listetudiant.php">Liste etudiant</a></li>
+                <li><a href="../php/addnote.php">Ajout notes</a></li>  
+            </ul>
+        </nav>
+    </header>
 
 <div class="etudiants-par-niveau">
     <h3>Liste des étudiants</h3>

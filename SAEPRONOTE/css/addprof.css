@@ -6,27 +6,42 @@
 }
 
 header {
-    background-color: rgba(3,42,73);
-    display:flex;
+    display: flex;
     justify-content: space-between;
-    height: 10ch;
-  }
-  
-  .logo{
+    align-items: center;
+    height: 9ch;
+    background-color: rgba(3,42,73);
+    
+}
+.logo{
     background-color: whitesmoke;
     border-radius:40px;
     margin-left: 40px;
     margin-top: 20px;
-    width: 20ch;
+    width: 10rem;
   }
-  
-  .menu{
+
+
+  header nav ul {
+    list-style: none;
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-   
-  }
-  
+    gap: 30px;
+}
+
+header nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    padding: 5px 10px;
+    transition: all 0.3s;
+}
+
+header nav ul li a:hover {
+    color: #b0c4de;
+    text-decoration: underline;
+    transform: translateY(-2px);
+}
+
 .sidebar {
     width: 200px;
     background-color:rgba(3,42,73);

@@ -81,10 +81,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 header('Location: php/Acceuil_admin.php');
                 break;
             case 2:
-                header('Location: php/Accueil_prof.php');
+                header('Location: php/accueil_prof.php');
                 break;
             case 3:
-                header('Location: php/Accueil_eleve.php');
+                header('Location: php/acceuil_eleve.php');
                 break;
             default:
                 $error = "Rôle non reconnu";
@@ -96,13 +96,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     }
 }
 ?>
-<header> 
-    <nav>
-        <div class="menu">
+<header>
+        <a href="index.php">
             <img class="logo" src="image/Logo.png" alt="logo">
-        </div>
-    </nav>
+        </a>
+        
+    </header>
 </header>
+
 <div class="_2-columns-2">
     <div class="gauche">
         <img src="image/image illustration.webp" class="image"/>

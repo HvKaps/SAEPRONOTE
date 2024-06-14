@@ -5,13 +5,13 @@ html {
 }
 
 
-
 header {
   background-color: rgba(3,42,73);
   display:flex;
   justify-content: space-between;
   height: 10ch;
 }
+
 
 .logo{
   background-color: whitesmoke;
@@ -20,6 +20,8 @@ header {
   margin-top: 20px;
   width: 20ch;
 }
+
+
 
 .menu{
   display: flex;
