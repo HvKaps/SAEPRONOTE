@@ -239,6 +239,13 @@ ALTER TABLE `Groupes`
 -- AUTO_INCREMENT pour la table `Notes`
 ALTER TABLE `Notes`
   MODIFY `ID_note` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+-- AUTO_INCREMENT pour les tables dÃ©chargÃ©es
+ALTER TABLE Etudiants
+ADD `Role` varchar(255) NOT NULL;
+ALTER TABLE Etudiants
+ADD CONSTRAINT fk_role
+FOREIGN KEY (Role)
+REFERENCES Compte(Role);
 
 COMMIT;
 
