@@ -1,5 +1,6 @@
 <?php
 session_start();
+include "../php/HEADER_Admin.php";
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -11,14 +12,16 @@ session_start();
 </head>
 <body>
 <header>
-   
+    <div class="navbar">
+        <h1>Liste des Professeurs</h1>
+    </div>
 </header>
 
 <?php
-$servername = "mysql-makine-enzo.alwaysdata.net";
-$username = "341199";
-$password = "9couronnes";
-$dbname = "makine-enzo_visualnote";
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "VisualNote";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
 
@@ -26,12 +29,10 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-
 $sql = "SELECT ID_enseignant, Nom, Prénom, Rôle FROM Enseignants";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
-
     echo '<table>
             <thead>
                 <tr>
@@ -56,28 +57,10 @@ if ($result->num_rows > 0) {
     echo "0 results";
 }
 
-
 $conn->close();
 ?>
 
-<div class="navbar">
-    <h1>Liste des Professeurs</h1>
-</div>
-    <table>
-        <thead>
-            <tr>
-                <th>ID_enseignant</th>
-                <th>Nom</th>
-                <th>Prénom</th>
-                <th>Rôle</th>
-            </tr>
-        </thead>
-        <tbody>
-         
-        </tbody>
-    </table>
-    <br>
-    <button onclick="location.href='consultereleve.php'">Retour</button>
+<br>
+<button onclick="location.href='consultereleve.php'">Retour</button>
 </body>
 </html>
-

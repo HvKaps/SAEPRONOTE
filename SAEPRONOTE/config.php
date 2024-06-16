@@ -1,9 +1,9 @@
 <?php
    function connexionDB(){
-   $host = "mysql-makine-enzo.alwaysdata.net";
-   $dbname = "makine-enzo_visualnote";
-   $user ="341199";
-   $pass ="9couronnes";
+   $host = "localhost";
+   $dbname = "VisualNote";
+   $user ="root";
+   $pass ="";
    try {
       
        $pdo = new PDO('mysql:host='. $host . ';dbname='. $dbname .';charset=utf8', $user, $pass);

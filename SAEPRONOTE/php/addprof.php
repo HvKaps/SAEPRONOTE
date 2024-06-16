@@ -1,6 +1,6 @@
 <?php
 session_start();
-include "HEADER.php";
+include "../php/HEADER_Admin.php";
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -11,13 +11,7 @@ include "HEADER.php";
     <title>Ajouter</title>
 </head>
 <body>
-<header> 
-    <nav>
-        <div class="menu">
-            <img class="logo" src="../image/Logo.png" alt="logo">
-        </div>
-    </nav>
-</header>
+
 <div class="sidebar">
     <a href="addprof.php" onclick="showForm('professeurForm')">Ajouter des professeurs</a>
     <a href="addetudiants.php" onclick="showForm('eleveForm')">Ajouter des élèves</a>
@@ -95,10 +89,10 @@ include "HEADER.php";
 
 <?php
 
-$servername = "mysql-makine-enzo.alwaysdata.net";
-$username = "341199";
-$password = "9couronnes";
-$dbname = "makine-enzo_visualnote";
+$servername = "localhost";
+ $username = "root";
+ $password = "";
+ $dbname = "VisualNote";
 
 
 $conn = new mysqli($servername, $username, $password, $dbname);

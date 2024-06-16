@@ -1,6 +1,6 @@
 <?php
 session_start();
-include "HEADER.php"
+include "../php/HEADER_Prof.php";
 ?>
 <!DOCTYPE html>
 <html lang="fr">

@@ -94,10 +94,10 @@ include "HEADER.php";
 
 <?php
  
- $servername = "mysql-makine-enzo.alwaysdata.net";
- $username = "341199";
- $password = "9couronnes";
- $dbname = "makine-enzo_visualnote";
+ $servername = "localhost";
+ $username = "root";
+ $password = "";
+ $dbname = "VisualNote";
  
 $conn = new mysqli($servername, $username, $password, $dbname);
 

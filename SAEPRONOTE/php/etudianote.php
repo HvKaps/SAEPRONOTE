@@ -7,7 +7,7 @@
 <body>
 <?php
 session_start();
-include "HEADER.php";
+include "HEADER_Eleve.php";
 
 
 if (!isset($_SESSION['ID_etudiant']) || !is_int($_SESSION['ID_etudiant'])) {
@@ -16,10 +16,10 @@ if (!isset($_SESSION['ID_etudiant']) || !is_int($_SESSION['ID_etudiant'])) {
 
 $student_id = (int) $_SESSION['ID_etudiant']; 
 
-$servername = "mysql-makine-enzo.alwaysdata.net";
-$username = "341199";
-$password = "9couronnes";
-$dbname = "makine-enzo_visualnote";
+$servername = "localhost";
+ $username = "root";
+ $password = "";
+ $dbname = "VisualNote";
 
 
 $conn = new mysqli($servername, $username, $password, $dbname);

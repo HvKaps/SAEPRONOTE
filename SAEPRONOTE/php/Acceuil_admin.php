@@ -1,7 +1,8 @@
-<?php session_start();?>
-<?php
-
+<?php session_start();
+include "../php/HEADER_Admin.php";
 ?>
+
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -11,29 +12,14 @@
     <title>Que voulez-vous faire ?</title>
 </head>
 <body>
-<header> 
-  
-  <nav>
-      <div class="menu">
-        <a href="php/Acceuil_admin.php">
-        <img class="logo" src="../image/Logo.png" alt="logo">
-        </a>
-   
-      
 
-
-      </div>
-      
-  </nav>
-
-</header>
     <div class="navbar">
         Que voulez-vous faire ?
     </div>
     <div class="container">
         <div class="card" onclick="location.href='addprof.php'">Ajouter</div>
-        <div class="card" onclick="location.href='../php/traitement_modifier.php'">Modifier</div>
-        <div class="card" onclick="location.href='liste_professeurs.php'">Consulter</div>
+        <div class="card" onclick="location.href='../php/consultereleve.php'">Consulter Eleve</div>
+        <div class="card" onclick="location.href='../php/liste_professeurs.php'">Consulter Professeurs</div>
     </div>
 </body>
 </html>
